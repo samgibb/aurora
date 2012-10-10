@@ -1,0 +1,52 @@
+<h3>Sub Categories</h3>
+<?php if (count($this->paginator)): ?>
+<?php $x = 0; foreach($this->paginator as $product): ?>
+       <?php 
+       if($product->productId > 0) :
+       ?>
+              <?php  if ($x%3==0) { ?>
+                    <div id="category" class="first paginate">
+                <?php } else { ?>
+                    <div id="category" class="paginate">
+                <?php } ?>        
+                <div id="category-info">
+                    <img src="/products/thumbnails/generic.png" />
+                    <form action="" method="post" id="addprod<?php echo '_'.$product->productId ?>">
+                        <?php 
+                            echo $this->formHidden($name = 'productId', $value = $product->productId, $attribs=null);
+                            echo $this->formLabel('addtocart', 'Add to cart'); 
+                            echo $this->checkBox('addtocart'); 
+                        ?>
+                            <br />
+                        <?php 
+                            echo $this->formLabel('count', 'Count');
+                            echo $this->formSelect($name='count', $value = null, $attribs = null, $options=array(500 => '500', 1000 => '1000', 1500 => '1500', 2000 => '2000'));
+                        ?>
+                        <?php echo $this->formSubmit($name='addtocart', $value='Add to cart', $attribs=null)?>
+                    </form>
+                    <p><?php echo $product->name; ?></p>
+                </div>
+            </div>	
+       <?php $x++;
+       endif;
+       ?>
+<?php endforeach; ?>
+<?php endif; ?>
+
+<script type="text/javascript">
+function getVote(id){
+    if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else{// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function(){
+        if (xmlhttp.readyState==4 && xmlhttp.status==200){
+        document.getElementById("poll").innerHTML=xmlhttp.responseText;
+        }
+      }
+    xmlhttp.open("GET","poll_vote.php?vote="+id,true);
+    xmlhttp.send();
+}
+</script>

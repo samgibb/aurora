@@ -1,0 +1,58 @@
+<div id="page-wrapper">
+<?php
+if(isset($this->messages)) {
+    echo implode($this->messages);
+}
+if(isset($this->page) && $this->page !== null) {
+?>
+<div id="page-body">
+
+
+		<?php 
+		$this->accordionPane("pagetab", $this->page['pageText'], array('title' => ucwords($this->page['pageName'])));
+		?>
+
+		<?php  
+		if($this->page['hasSubPages'] && $this->page['pageName'] !== 'home') {
+			foreach($this->page['subPages'] as $subPage) {
+				$this->accordionPane("pagetab", $subPage->pageText, array('title' => ucwords($subPage['pageName'])));
+			}
+		}
+
+		
+	echo $this->accordionContainer("pagetab", array(), array('class' => 'flora'));
+		?>
+</div>
+
+<div id="widget_container">
+	<?php 
+	if(isset($this->widget)) {
+		echo $this->{$this->widget};
+	}
+	?>
+</div>
+
+<?php
+} else {
+// page would be null
+}
+?>
+</div>
+<?php
+$this->headStyle()->captureStart();
+?>
+#Editor-Editor {
+border: 1px solid black;
+width:50%;
+padding:5px;
+}
+#page-body {
+padding:1em;
+}
+#subpage-nav-links a {
+margin: 0 0px 0 10px;
+text-decoration:none;
+}
+<?php
+$this->headStyle()->captureEnd();
+?>

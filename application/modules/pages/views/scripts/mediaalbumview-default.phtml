@@ -1,0 +1,18 @@
+<div id="media-albums-container">
+	<h3>Albums view :</h3>
+</div>
+<?php
+if(isset($this->data->paginator)) {
+	if(count($this->data->paginator) > 0) {
+		foreach($this->data->paginator as $album) { ?>
+
+			<div class="album-icon">
+				<img src="/modules/media/images/ablumicon-default.png" alt="icon" height="115" width="130" />
+				<h4 class="album-name"><?php echo  '<a href="'. $this->data->pageName .'?albumName='.$album->albumName.'&action=slideShow">'.$album->albumName.'</a>';?></h4>
+			</div>
+<?php }
+		echo $this->paginationControl($this->data->paginator,'Sliding','pagination_control_albumview.phtml', array('albumName' => $this->data->albumName, 'action' => $this->data->action)); 
+	}
+	
+}
+?>

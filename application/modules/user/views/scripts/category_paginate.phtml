@@ -1,0 +1,24 @@
+<h3>Categories</h3>
+
+<?php if (count($this->paginator)): ?>
+<?php $x = 0; foreach($this->paginator as $product): ?>
+        <?php 
+       if($product->product_id > 0) :
+       ?>
+              <?php  if ($x%3==0){ ?>
+                    <div id="category" class="first paginate">
+                <?php } else{ ?>
+                    <div id="category" class="paginate">
+                <?php } ?>        
+                <div id="category-info">
+                    <img src="/products/thumbnails/generic.png" />
+                    <p><?php echo $product->product_name; ?></p>
+                </div>
+            </div>
+
+        	
+       <?php $x++;
+       endif;
+       ?>
+<?php endforeach; ?>
+<?php endif; ?>

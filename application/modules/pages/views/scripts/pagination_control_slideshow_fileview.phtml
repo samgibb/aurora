@@ -1,0 +1,54 @@
+<?php
+if ($this->pageCount):
+?>
+<div class="pagination-control">
+     <!-- Previous page link -->
+    <?php
+    if (isset($this->previous)):
+    ?>
+     <a href="<?php echo "/media?albumName=$this->albumName&amp;action=$this->action&amp;page=$this->previous"; ?>"><span class="previous">&laquo;&nbsp;Previous</span></a><span class="bar"> | </span>
+      <?php else: ?>
+      <span class="disabled">&laquo;&nbsp;Previous</span><span class="bar"> | </span>
+<?php endif; ?>
+<!-- Numbered page links -->
+<?php foreach ($this->pagesInRange as $page): ?>
+  <?php if ($page != $this->current): ?>
+    <a href="<?php echo "/media?albumName=$this->albumName&amp;action=$this->action&amp;page=$page"; ?>"><span class="page"><?php echo $page; ?></span></a><span class="bar"> | </span>
+  <?php else: ?>
+    <span class="current"><?php echo $page; ?></span><span class="bar"> | </span>
+  <?php endif; ?>
+<?php endforeach; ?>
+<!-- Next page link -->
+<?php if (isset($this->next)): ?>
+  <a href="<?php echo "/media?albumName=$this->albumName&amp;action=$this->action&amp;page=$this->next"; ?>"><span class=""></span>Next&nbsp;&raquo;</a>
+<?php else: ?>
+  <span class="disabled">Next&nbsp;&raquo;</span>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php $this->headStyle()->captureStart(); ?>
+.pagination-control {
+width:100%;
+margin: 0 auto 0 auto;
+text-align:center;
+}
+.pagination-control a:visited {
+
+}
+.current {
+font-size:20px;
+text-decoration:underline;
+}
+.disabled {
+
+}
+.next {
+
+}
+.previous {
+
+}
+.page {
+
+}
+<?php $this->headStyle()->captureEnd(); ?>

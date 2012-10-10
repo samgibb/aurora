@@ -1,0 +1,17 @@
+<div class="page-widget">
+<?php 
+// This prevents any formatting within the widget output
+$tags = new Zend_Filter_StripTags();
+?>
+
+
+<?php  
+//Zend_Debug::dump($this->page['subPages']);
+	foreach($this->widgetPages as $subPage) {
+		$this->accordionPane("homewidgettab", $subPage->pageText, array('title' => $subPage->pageName));
+	}
+	
+	echo $this->accordionContainer("homewidgettab", array('collapsible'  => true), array('class' => 'flora'));
+?>
+
+</div>

@@ -1,0 +1,77 @@
+@charset "utf-8";
+
+/******************************************************** Login **********************************************/
+#user-login-form {
+	background: url(/images/login-form.png) no-repeat;
+	height: 288px;
+	width: 349px;
+	margin: 20px auto;
+}
+
+/******************************************************** Register **********************************************/
+#user-register-content {
+	
+}
+
+#user-register-form {
+	background: url(/images/register-form.png) no-repeat;
+	height: 592px;
+	width: 349px;
+	margin: 30px auto;
+}
+
+form {
+	padding: 20px;
+	margin-left: 20px;
+	margin-top: -18px;
+}
+
+fieldset {
+	line-height: 34px;
+}
+
+dt {
+	margin-top: 10px;
+}
+
+input[type="text"] {
+	width: 86%;
+	background-color: white;
+	border: 1px #CCC solid;
+	height: 30px;
+}
+
+input[type="password"] {
+	width: 86%;
+	background-color: white;
+	border: 1px #CCC solid;
+	height: 30px;
+}
+
+input[type="submit"] {
+	background: url(/images/button-sprite.png) no-repeat;
+	width: 106px;
+	height: 39px;
+	border: none;
+	color: white;
+	font-size: 15px;
+	font-family: 'Open Sans Condensed', sans-serif;
+	text-transform: uppercase;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+dd#submit-element {
+	float: right;
+}
+
+.submit {
+	background: url(/images/button-sprite.png) no-repeat;
+	width: 106px;
+	height: 39px;
+	border: 0;
+}
+
+.uniqueButtonClass {
+	background-position: 0 25px;
+}

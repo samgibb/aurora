@@ -1,0 +1,14 @@
+<div class="page-widget">
+<?php 
+// This prevents any formatting within the widget output
+$tags = new Zend_Filter_StripTags();
+?>
+		<?php foreach($this->widgetPages as $widget) : ?>
+		<div class="widget-item">
+				<div class="widget-item-head widget-heading-bg"></div>
+				<h3><?php echo $widget->pageName; ?></h3>
+				<p class="widget-page-text"><?php echo $tags->filter(nl2br(substr($widget->pageText, 0, 300), true)) . '...'; ?></p>
+				<div class="widget-readmore widget-heading-bg"><a href="/<?php echo $widget->pageName; ?>">Read More&nbsp;&raquo;</a></div>
+		</div>
+		<?php endforeach;?>
+</div>

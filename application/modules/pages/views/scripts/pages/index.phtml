@@ -1,0 +1,90 @@
+<div id="page-wrapper">
+<?php
+if(isset($this->messages)) {
+    echo implode($this->messages);
+}
+/**
+ * This page validate at w3c as is except for the two dojo types when the media widget is called
+ * If this page is modified it MUST BE VALIDATED before you close this file!!!
+ * please do not remove this notice
+ */
+if(isset($this->page) && $this->page !== null) {
+	// the slider knows wherer it should render or not
+	echo $this->imageSlider($sliderSkin = 'default', $this->isHome, $this->page['showSlider']);
+?>
+<div id="page-content">
+	<?php if(isset($this->allowEdit) && $this->allowEdit === true) {?>
+		<div class="controls">
+			<a href="/admin/pages/create" title="create"><span class="create">&nbsp;</span></a>
+			<a href="/admin/pages/edit/<?php echo $this->page['pageName']; ?>" title="edit"><span class="edit">&nbsp;</span></a>
+			<?php
+			if( $this->page['pageName'] != 'home') { ?>
+			<a href="/admin/pages/delete/<?php echo $this->page['pageName']; ?>" title="delete"><span class="delete">&nbsp;</span></a>
+	  <?php } ?>
+		</div>
+	<?php } ?>
+
+<div id="page-body">
+<div id="parent-nav-link">
+<?php
+	if(isset($this->page['parentPage']) && $this->page['parentPage'] instanceof Pages_Model_Row_Page) {
+//Zend_Debug::dump($this->page['parentPage']);
+		if($this->page['parentPage']->pageName !== 'home') {
+			echo '<a href="/'.$this->page['parentPage']->pageName.'">'.$this->page['parentPage']->pageName.'</a>';
+			//echo $this->ajaxLink(ucwords($this->page['parentPage']->pageName), '/' . $this->page['parentPage']->pageName, array('noscript' => true, 'method' => 'post', 'update' => '#page-body'));
+		}
+	}
+?>
+</div>
+		<?php if($this->page['hasSubPages']) { ?>
+		<div id="subpage-nav-links" style="float:right;">
+				<?php foreach($this->page['subPages'] as $subPage) {
+						echo '<a href="/'.$subPage->pageName.'">'.$subPage->pageName.'</a>';
+						//echo $this->ajaxLink("$subPage->pageName", '/' . "$subPage->pageName", array('noscript' => true, 'method' => 'post', 'update' => '#page-body'));
+					} ?>
+		</div>
+		<?php } ?>
+
+<h2><?php echo ucwords( $this->page['pageName'] ); ?></h2>
+
+	<?php echo $this->page['pageText']; ?>
+
+<div id="widget-container">
+	<?php
+	if(isset($this->widget)) {
+		echo $this->{$this->widget};
+	}
+	?>
+</div>
+<?php
+if($this->showFb) {
+//echo $this->faceBookHelper($this->fb, $fbTitle = $this->page['pageName'], $fbType = null, $fbUrl = null, $fbImage = null, $fbsiteName = null, $type = 'page');
+}
+?>
+</div><!-- close page-body -->
+</div>
+
+<?php
+} else {
+// page would be null
+}
+?>
+</div>
+<?php
+$this->headStyle()->captureStart();
+?>
+#Editor-Editor {
+border: 1px solid black;
+width:50%;
+padding:5px;
+}
+#page-body {
+padding:1em;
+}
+#subpage-nav-links a {
+margin: 0 0px 0 10px;
+text-decoration:none;
+}
+<?php
+$this->headStyle()->captureEnd();
+?>

@@ -1,0 +1,29 @@
+<h3>Sub Categories</h3>
+
+<?php if (count($this->paginator)): ?>
+<?php $x = 0; foreach($this->paginator as $product): ?>
+        <?php 
+       if($product->product_id > 0) :
+       ?>
+              <?php  if ($x%3==0){ ?>
+                    <div id="product" class="first">
+                <?php } else{ ?>
+                    <div id="product">
+                <?php } ?>        
+                <div id="product-info">
+                    <img src="/products/thumbnails/generic.png" />
+                    <p><?php echo $product->product_name; ?></p>
+                    <p class="id">$<?php echo $product->price; ?></p>
+                </div>
+        
+                <div id="product-link">
+                    <a href="/store/rug/<?php echo $rug->id; ?>">Add To Cart</a>
+                </div>
+            </div>
+
+        	
+       <?php $x++;
+       endif;
+       ?>
+<?php endforeach; ?>
+<?php endif; ?>

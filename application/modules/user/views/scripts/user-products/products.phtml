@@ -1,0 +1,15 @@
+<?php echo $this->partial('widgets.phtml', 'default'); ?>
+
+<div id="products" class="blend"> 
+<div class="white products">
+	<div class="wrapper">
+            <?php //echo $this->partial('product_list.phtml', array('paginator' => $this->paginator));?>
+            <?php echo $this->partial('subcategory_paginate.phtml', array('paginator' => $this->paginator));?>
+            
+<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination_control.phtml'); ?>
+	</div>
+</div>
+</div>
+
+
+

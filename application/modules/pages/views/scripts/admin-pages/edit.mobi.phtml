@@ -1,0 +1,11 @@
+<?php
+if(isset($this->form)) {
+    echo $this->form;
+    //echo $this->setupEditor('pageText');
+    echo $this->setupEditor('pageText', $options = null, $withFinder = true, ucfirst($this->module));
+} else {
+?>
+<span class="user-notice">The requested page was not found</span>
+<?php
+}
+?>

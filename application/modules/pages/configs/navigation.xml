@@ -1,0 +1,20 @@
+<config>
+	<pagesnav>
+		<publicpages>
+			<label>Pages</label>
+			<uri>/media/</uri>
+			<resource></resource>
+			<privilege></privilege>
+			<order>1</order>
+			<visible>false</visible>
+			</publicpages>
+	</pagesnav>
+	<adminpagesnav>
+	    <pagesmain>
+	        <label>Pages</label>
+	        <uri>/admin/pages/create</uri>
+	        <resource>pages</resource>
+	        <privilege>pages.view.admin.menu</privilege>
+	    </pagesmain>
+	</adminpagesnav>
+</config>

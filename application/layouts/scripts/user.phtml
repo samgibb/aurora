@@ -1,0 +1,100 @@
+<?php
+$user = new User_Model_UserManager();
+/* Start html output
+ * Set a valid doctype
+ */
+//Print doctype to browser
+echo $this->doctype();
+?>
+<html>
+    <head>
+        <?php
+        //Set formatted output indent TODO: Needs tweaked
+        $this->headMeta()->setIndent('    ') . "\n";
+        $this->seoHelper();
+        //Print to browser
+        echo $this->headMeta();
+        //Set title seperator
+        $this->headTitle()->setSeparator(' - ');
+        //Set the default page title
+        //$this->headTitle($this->siteName());
+        //Print it to the browser tab
+        /* Please note this will be prepended too through out the script
+         * @uses Dxcore_Controller_Plugin_Pagetitle
+         */
+        echo $this->headTitle($this->siteName());
+        ?>
+        <base href="/" />
+        <?php
+        //Setup the main style - See style sheet for includes
+        $this->headLink()->appendStylesheet('/css/reset.css', 'screen');
+        $this->headLink()->appendStylesheet('/css/style.css', 'screen');
+        // IS this IE?
+        //echo $this->headLink()->appendStylesheet($this->baseUrl() . '/css/ie.css', 'screen', 'IE 9', null);
+        
+        //If and only if Dojo is enabled and called (do we need it? if yes) print it to the browser
+        if ($this->dojo()->isEnabled()):
+            echo $this->dojo();
+        endif;
+        
+        if(isset($this->editor) && $this->editor === 'ckeditor') :
+            echo $this->headScript()->offsetSetFile( 200,'/js/ckeditor/ckeditor.js');
+        endif;
+        
+        if(isset($this->editor) && $this->editor === 'tinymce') :
+            echo $this->headScript()->offsetSetFile( 200, '/js/tiny_mce/tiny_mce.js');
+        endif;
+        
+        echo $this->headScript();
+        //Any remaining styles?
+        $this->moduleStyles();
+        echo $this->headLink();
+        echo $this->headStyle();
+        
+        ?>
+	
+	<link type="text/css" href="css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+	<script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	
+    </head>
+    <body class="tundra">
+    <?php ?>
+	<div id="outer_wrapper">
+		<div id="wrapper">
+			<div id="header"></div>
+				<div id="menu">
+					<div class="menutext">
+						<?php echo $this->navigation()->menu();?>
+					</div>
+				</div>
+                <?php
+                //$menuBar = new Dxcore_Controller_Action_Helper_MenuBar();
+                //                //$menuBar->menuBar();
+                //                echo $this->partial('vert_menu.phtml');
+                ?>
+               
+                    <?php
+                    echo $this->layout()->content;
+                    ?>
+                    
+            	<div id="footer"><!-- footer normally begins here -->
+					<div id="copyright">
+						<a>The country escape&nbsp;&nbsp;|&nbsp;&nbsp;&copy;&nbsp;
+						<?php 
+						$startYear = 2011; $thisYear = date('Y');
+						if ($startYear == $thisYear) :
+    						echo $startYear;
+ 						else :
+    						echo "{$startYear}-{$thisYear}";
+						endif; ?>
+						</a>
+					</div>
+				</div><!-- footer -->
+			</div>
+		</div>
+    </body>
+</html>

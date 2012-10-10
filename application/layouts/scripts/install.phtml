@@ -1,0 +1,107 @@
+<?php
+/* Start html output
+ * Set a valid doctype
+ */
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=latin1');
+//Print doctype to browser
+echo $this->doctype();
+?>
+<html>
+  <head>
+        <?php
+        //Set formatted output indent TODO: Needs tweaked
+        $this->headMeta()->setIndent(' ') . "\n";
+        //Print to browser
+        echo $this->headMeta();
+        //Set title seperator
+        $this->headTitle()->setSeparator(' - ');
+        //Set the default page title
+        $this->headTitle('Dxcore Installer');
+        //Print it to the browser tab
+        /* Please note this will be prepended too through out the script
+         * @uses Dxcore_Controller_Plugin_Pagetitle
+         */
+        echo $this->headTitle();
+        ?>
+        <base href="/" />
+        <?php
+        //Setup the main style - See style sheet for includes
+        //$this->headLink()->appendStylesheet($this->baseUrl() . '/css/reset.css', 'screen');
+        $this->headLink()->appendStylesheet($this->baseUrl() . '/css/admin/dirextioncms.css', 'screen');
+        $this->headLink()->appendStylesheet($this->baseUrl() . '/css/admin/thickbox.css', 'screen');
+        
+        // IS this IE?
+        //echo $this->headLink()->appendStylesheet($this->baseUrl() . '/css/ie.css', 'screen', 'IE 9', null);
+        
+        // Load the Module specific style sheets
+        //echo $this->styleSheet();
+        
+        //Load the site specific style sheet
+        echo $this->headLink();
+        
+        //If and only if Dojo is enabled and called (do we need it? if yes) print it to the browser
+        //if ($this->dojo()->isEnabled()):
+          //  echo $this->dojo();
+        //endif;
+        if($this->jQuery()->isEnabled() || $this->uiIsEnabled()) :
+        	echo $this->jQuery();
+        endif;
+        // Any remaining jscript?
+        //$this->headScript()->appendFile('/js/jquery/lib/jquery.js');
+        $this->headScript()->appendFile('/js/jquery/lib/chili-1.7.pack.js');
+        $this->headScript()->appendFile('/js/jquery/lib/jquery.easing.js');
+        $this->headScript()->appendFile('/js/jquery/lib/jquery.dimensions.js');
+        $this->headScript()->appendFile('/js/jquery/jquery.accordion.js');
+        $this->headScript()->appendFile('/js/utils.js');
+        
+        $this->headScript()->offsetSetFile( 200,'/js/ckeditor/ckeditor.js');
+        $this->headScript()->offsetSetFile( 210,'/js/ckeditor/adapters/jquery.js');
+        echo $this->headScript()->offsetSetFile( 220,'/js/ckfinder/ckfinder.js');
+        echo $this->headStyle();
+        ?>
+    
+  </head>
+<body>
+<div id="wrap">
+	<div id="main" class="clearfix">
+		<div id="content">
+		<div id="header">
+			<div id="header_info">
+					<div id="info_left">
+						<p class="name"><?php //echo $this->user->firstName . ' ' .$this->user->lastName ?></p>
+						<p class="email"><?php //echo $this->user->email ?></p>
+						<a href="/user/login/logout">Logout</a>
+					</div>
+					<div id="info_right">
+<!-- 						<img src="/css/admin/images/users/admin.jpg" width="70" title="Dirextion Admin"> -->
+					</div>
+				</div>
+		</div>
+		<div id="breadcrumbs">
+            Content Management <span class="arrow"><span class="hidden">&gt;</span></span> <a href="/admin">Dashboard</a><span class="arrow"><span class="hidden">&gt;</span></span>
+            <?php echo $this->navigation()->breadcrumbs()->setMinDepth(0)->setLinkLast(true)->setSeparator('<span class="arrow"><span class="hidden">&gt;</span></span>'); ?>
+            </div>
+        <div id="nav">
+           	  <div id="dashlink"><a href="/admin">Dashboard</a></div>
+              <?php //echo $this->partial('accordion.phtml', 'default');?>
+              <div id="accordion">
+              <?php 
+//               	$partial = array('menu.phtml', 'default');
+//               	$this->navigation()->menu()->setPartial($partial);
+//               	echo $this->navigation()->menu()->render();
+              //echo $this->navigation(Zend_Registry::get('Admin_Navigation'));
+              ?>
+              </div>
+              
+          </div>
+          <div id="right-column">
+        	<?php echo $this->layout()->content; ?>
+        	</div>
+        </div>
+	</div>
+</div>
+<div id="footer">
+	<div id="footercontent">Content Management &copy; <?php echo date('Y'); ?> <a href="http://dirextion.com">Dirextion</a> . <span class="pushapart">|</span> All Rights Reserved</div>
+</div>
+</body>
+</html>

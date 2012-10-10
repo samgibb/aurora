@@ -1,0 +1,45 @@
+<div id="content">
+	<div id="user-account-summary">
+<h2 class="heading">Account Summary</h2>
+<?php 
+if(isset($this->message) || isset($this->messages)):
+?>
+<span class="script_message">
+<?php
+if(is_array($this->messages))
+{
+    echo implode($this->messages);
+} else {
+    echo $this->message;
+}?>
+</span>
+<?php 
+endif 
+?>
+<?php 
+if(isset($this->user))
+{ ?>
+	
+	<dl id="user-userinfo">
+		<dt>User Name: <?php echo $this->user->userName; ?></dt>
+		<dt>Public Name: <?php echo $this->user->firstName . '&nbsp;' . $this->user->lastName; ?></dt>
+		<dt>Email: <?php echo $this->user->email; ?></dt>
+		<dt>Registered Date: <?php echo new Zend_Date((int) $this->user->registeredDate, Zend_Date::TIMESTAMP)?></dt>
+		<dt><?php ?></dt>
+	</dl>
+	
+  <?php if(isset($this->invoices)) { ?>
+	<div id="user-account-invoice">
+	<h3>Current Invoices</h3>
+	<?php 
+		foreach($this->invoices as $invoice) { ?>
+			<div class="user-invoice-amount"><?php echo $this->currency($invoice->amount); ?></div>
+  <?php } ?>
+    </div>
+<?php }
+	//Zend_Debug::dump($this->invoices);
+}	
+?>
+
+	</div>
+</div>
